@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Islamic Coding Web Companion • Petualangan Level 2</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Nunito', sans-serif; }
+    .canvas-box { background: #f0fdfa; border: 2px dashed #0d9488; }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- Header Banner -->
+  <header class="bg-slate-800 border-b border-teal-500/30 sticky top-0 z-50 backdrop-blur-md bg-slate-800/90">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-teal-500 flex items-center justify-center text-xl shadow-lg shadow-teal-500/30">🕌</div>
+        <div>
+          <h1 class="font-extrabold text-lg text-white leading-tight">Islamic Coding Web Companion</h1>
+          <p class="text-xs text-teal-400 font-semibold">Pendamping Resmi Buku Petualangan Level 2</p>
+        </div>
+      </div>
+      <a href="https://scratch.mit.edu" target="_blank" class="text-xs bg-teal-600 hover:bg-teal-500 text-white font-bold px-3 py-1.5 rounded-lg transition">
+        Buka Scratch Online ↗
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="max-w-5xl mx-auto px-4 py-6 w-full">
+    <div class="bg-gradient-to-r from-teal-900/60 to-emerald-950/60 border border-teal-500/30 rounded-2xl p-6 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="max-w-xl">
+        <span class="inline-block px-3 py-1 bg-teal-500/20 text-teal-300 text-xs font-bold rounded-full mb-2">QR Code Portal Aktif</span>
+        <h2 class="text-2xl font-black text-white mb-2">Uji Coba Game, Unduh Sprite & Modifikasi Kode!</h2>
+        <p class="text-sm text-slate-300 leading-relaxed">
+          Pilih salah satu bab di bawah untuk mencoba simulasi game berjalan langsung di browsermu, mengunduh aset gambar karakter, dan mempelajari cara memodifikasinya di Scratch.
+        </p>
+      </div>
+      <div class="flex-shrink-0">
+        <img src="assets/cover_illustration.jpg" alt="Cover" class="w-40 rounded-xl border-2 border-teal-400/40 shadow-2xl">
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Selector Tabs -->
+  <main class="max-w-5xl mx-auto px-4 pb-12 w-full flex-grow">
+    
+    <!-- Tab Navigation -->
+    <div class="flex space-x-2 border-b border-slate-700 pb-2 overflow-x-auto mb-6 scrollbar-none" id="tabNav">
+      <button onclick="switchTab(1)" id="btn-1" class="px-4 py-2 rounded-lg font-bold text-xs bg-teal-500 text-white transition flex-shrink-0">
+        Bab 1: Kartu Nama
+      </button>
+      <button onclick="switchTab(2)" id="btn-2" class="px-4 py-2 rounded-lg font-bold text-xs bg-slate-800 text-slate-300 hover:bg-slate-700 transition flex-shrink-0">
+        Bab 2: Burung Pos
+      </button>
+      <button onclick="switchTab(3)" id="btn-3" class="px-4 py-2 rounded-lg font-bold text-xs bg-slate-800 text-slate-300 hover:bg-slate-700 transition flex-shrink-0">
+        Bab 3: Senyum Sedekah
+      </button>
+      <button onclick="switchTab(4)" id="btn-4" class="px-4 py-2 rounded-lg font-bold text-xs bg-slate-800 text-slate-300 hover:bg-slate-700 transition flex-shrink-0">
+        Bab 4: Kaki Hijaiyah
+      </button>
+      <button onclick="switchTab(5)" id="btn-5" class="px-4 py-2 rounded-lg font-bold text-xs bg-slate-800 text-slate-300 hover:bg-slate-700 transition flex-shrink-0">
+        Bab 5: Dua Sahabat
+      </button>
+      <button onclick="switchTab(6)" id="btn-6" class="px-4 py-2 rounded-lg font-bold text-xs bg-slate-800 text-slate-300 hover:bg-slate-700 transition flex-shrink-0">
+        Bab 6: Burung Meluncur
+      </button>
+    </div>
+
+    <!-- TAB 1: BAB 1 KARTU NAMA -->
+    <div id="tab-1" class="tab-content block">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Live Playable Simulation -->
+        <div class="lg:col-span-7 bg-slate-800 border border-slate-700 rounded-2xl p-5 shadow-lg flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider">🎮 Simulasi Interaktif Canvas</span>
+              <button onclick="playBab1()" class="text-xs bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3 py-1 rounded-md transition flex items-center gap-1">
+                <span>▶ Jalankan Bendera Hijau</span>
+              </button>
+            </div>
+            
+            <div class="relative w-full aspect-[4/3] bg-gradient-to-b from-sky-200 to-emerald-100 rounded-xl overflow-hidden border-2 border-slate-600 flex items-center justify-center p-4" id="stage1">
+              <!-- Balon Kata Interaktif -->
+              <div id="bubble1" class="absolute top-12 bg-white text-slate-900 font-bold px-4 py-2.5 rounded-2xl shadow-xl text-sm border-2 border-teal-500 opacity-0 transition-all duration-300 max-w-[80%] text-center">
+                Assalamu'alaikum!
+              </div>
+              <!-- Karakter Sprite -->
+              <div id="character1" class="text-6xl transition-transform duration-300 cursor-pointer hover:scale-110">
+                🧕
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-700 text-xs text-slate-400 flex items-center justify-between">
+            <span>Status: <b id="status1" class="text-teal-400">Siap dijalankan</b></span>
+            <span>Sprite: <b>Zahra</b></span>
+          </div>
+        </div>
+
+        <!-- Modifikasi & Blok Code -->
+        <div class="lg:col-span-5 space-y-4">
+          <div class="bg-slate-800 border border-slate-700 rounded-2xl p-5 shadow-lg">
+            <h3 class="font-extrabold text-white text-base mb-2">🧩 Susunan Blok Koding (SESUDAH)</h3>
+            <img src="assets/bab1_sesudah.png" alt="Blok Bab 1" class="rounded-lg border border-slate-600 w-full mb-3 shadow">
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Blok <code>ucapkan ... selama 2 detik</code> memberi waktu tenang bagi mata untuk membaca kalimat salam dan nama secara tertib.
+            </p>
+          </div>
+
+          <div class="bg-slate-800/80 border border-amber-500/30 rounded-2xl p-5 shadow-lg">
+            <h3 class="font-extrabold text-amber-300 text-sm mb-2">🛠️ Coba Modifikasi Sendiri!</h3>
+            <ul class="text-xs text-slate-300 space-y-1.5 list-disc pl-4">
+              <li>Ganti teks salam dengan nama lengkapmu sendiri.</li>
+              <li>Ubah angka durasi balon kata dari <b>2 detik</b> menjadi <b>4 detik</b>.</li>
+              <li>Tambahkan balon kata ketiga yang menceritakan cita-cita kebaikanmu.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TAB 2: BAB 2 BURUNG POS -->
+    <div id="tab-2" class="tab-content hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div class="lg:col-span-7 bg-slate-800 border border-slate-700 rounded-2xl p-5 shadow-lg flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider">🎮 Simulasi Interaktif Canvas</span>
+              <button onclick="playBab2()" class="text-xs bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3 py-1 rounded-md transition flex items-center gap-1">
+                <span>▶ Jalankan Algoritma Terbang</span>
+              </button>
+            </div>
+            
+            <div class="relative w-full aspect-[4/3] bg-gradient-to-b from-sky-300 to-emerald-200 rounded-xl overflow-hidden border-2 border-slate-600 flex items-center justify-between p-8" id="stage2">
+              <div id="pohon" class="text-5xl">🌳</div>
+              <div id="burung2" class="text-4xl absolute left-14 top-28 transition-all duration-1000 ease-in-out">🕊️</div>
+              <div id="masjid2" class="text-6xl">🕌</div>
+              <div id="bubble2" class="absolute top-6 left-1/2 -translate-x-1/2 bg-white text-slate-900 font-bold px-4 py-2 rounded-xl shadow-xl text-xs border-2 border-teal-500 opacity-0 transition-opacity">
+                Bismillah, mengantar pesan sedekah!
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-700 text-xs text-slate-400 flex items-center justify-between">
+            <span>Status: <b id="status2" class="text-teal-400">Burung bersiap di sarang</b></span>
+            <span>Pesan: <b>terbang-ke-masjid</b></span>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 space-y-4">
+          <div class="bg-slate-800 border border-slate-700 rounded-2xl p-5 shadow-lg">
+            <h3 class="font-extrabold text-white text-base mb-2">🧩 Blok Algoritma Runtut</h3>
+            <img src="assets/bab2_sesudah.png" alt="Blok Bab 2" class="rounded-lg border border-slate-600 w-full mb-3 shadow">
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Menggunakan penyiaran pesan <code>siarkan [terbang-ke-masjid] dan tunggu</code> memastikan burung tidak melompat sebelum doa basmalah selesai diucapkan.
+            </p>
+          </div>
+          <div class="bg-slate-800/80 border border-amber-500/30 rounded-2xl p-5 shadow-lg">
+            <h3 class="font-extrabold text-amber-300 text-sm mb-2">🛠️ Coba Modifikasi Sendiri!</h3>
+            <ul class="text-xs text-slate-300 space-y-1.5 list-disc pl-4">
+              <li>Ubah waktu meluncur dari <b>3 detik</b> menjadi <b>1 detik</b> (terbang kilat).</li>
+              <li>Ganti burung dengan karakter lain (misalnya kurir sepeda).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: BAB 3 SENYUM SEDEKAH -->
+    <div id="tab-3" class="tab-content hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div class="lg:col-span-7 bg-slate-800 border border-slate-700 rounded-2xl p-5 shadow-lg flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider">🎮 Simulasi Interaktif Canvas</span>
+              <button onclick="playBab3()" class="text-xs bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3 py-1 rounded-md transition flex items-center gap-1">
+                <span>▶ Dialog Santun</span>
+              </button>
+            </div>
+            
+            <div class="relative w-full aspect-[4/3] bg-gradient-to-b from-amber-100 to-orange-100 rounded-xl overflow-hidden border-2 border-slate-600 flex items-center justify-center gap-12 p-8" id="stage3">
+              <div class="text-center">
+                <div id="char3a" class="text-6xl transition-transform">👦</div>
+                <div class="text-xs font-bold text-slate-700 mt-2">Ahmad</div>
+              </div>
+              <div id="bubble3" class="absolute top-8 bg-white text-slate-900 font-bold px-4 py-2.5 rounded-2xl shadow-xl text-xs border-2 border-amber-500 opacity-0 transition-all text-center max-w-[70%]">
+                Maaf, tadi aku kurang hati-hati...
+              </div>
+              <div class="text-center">
+                <div id="char3b" class="text-6xl transition-transform">🧒</div>
+                <div class="text-xs font-bold text-slate-700 mt-2">Ali</div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-700 text-xs text-slate-400 flex items-center justify-between">
+            <span>Status: <b id="status3" class="text-teal-400">Siap berdialog</b></span>
+            <span>Adab: <b>Memaafkan & Berterima Kasih</b></span>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 space-y-4">
+          <div class="bg-slate-800 border border-slate-700 rounded-2xl p-5 shadow-lg">
+            <h3 class="font-extrabold text-white text-base mb-2">🧩 Susunan Blok Dialog Santun</h3>
+            <img src="assets/bab3_sesudah.png" alt="Blok Bab 3" class="rounded-lg border border-slate-600 w-full mb-3 shadow">
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Kalimat rendah hati meredakan amarah dan menjadikan suasana pertemanan hangat kembali.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: BAB 4 KAKI HIJAIYAH MELANGKAH -->
+    <div id="tab-4" class="tab-content hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div class="lg:col-span-7 bg-slate-800 border border-slate-700 rounded-2xl p-5 shadow-lg flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider">🎮 Simulasi Animasi Kostum Melangkah</span>
+              <button onclick="playBab4()" class="text-xs bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3 py-1 rounded-md transition flex items-center gap-1">
+                <span id="btnText4">▶ Mulai Melangkah</span>
+              </button>
+            </div>
+            
+            <div class="relative w-full aspect-[4/3] bg-gradient-to-b from-sky-200 to-emerald-100 rounded-xl overflow-hidden border-2 border-slate-600 flex items-center justify-between p-8" id="stage4">
+              <div id="sprite4" class="text-6xl absolute left-8 bottom-12 transition-all font-black text-teal-800">
+                ب
+              </div>
+              <div class="text-7xl absolute right-8 bottom-10">🕌</div>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-700 text-xs text-slate-400 flex items-center justify-between">
+            <span>Status: <b id="status4" class="text-teal-400">Jeda napas 0.15 detik aktif</b></span>
+            <span>Kostum: <b id="costumeName4">langkah-1</b></span>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 space-y-4">
+          <div class="bg-slate-800 border border-slate-700 rounded-2xl p-5 shadow-lg">
+            <h3 class="font-extrabold text-white text-base mb-2">🧩 Blok Animasi Berjalan Halus</h3>
+            <img src="assets/bab4_sesudah.png" alt="Blok Bab 4" class="rounded-lg border border-slate-600 w-full mb-3 shadow">
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Blok <code>kostum berikutnya</code> bergantian dengan jeda <code>tunggu 0.15 detik</code> menciptakan ayunan kaki yang tenang dan alami.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: BAB 5 DUA SAHABAT -->
+    <div id="tab-5" class="tab-content hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div class="lg:col-span-7 bg-slate-800 border border-slate-700 rounded-2xl p-5 shadow-lg">
+          <h3 class="font-extrabold text-white text-base mb-2">🧩 Kunci Sinkronisasi Broadcast</h3>
+          <div class="space-y-3">
+            <img src="assets/bab5_sesudah_spriteA.png" alt="Sprite A" class="rounded-lg border border-slate-600 w-full shadow">
+            <img src="assets/bab5_sesudah_spriteB.png" alt="Sprite B" class="rounded-lg border border-slate-600 w-full shadow">
+          </div>
+        </div>
+        <div class="lg:col-span-5 bg-slate-800 border border-slate-700 rounded-2xl p-5 shadow-lg">
+          <h3 class="font-extrabold text-teal-300 text-sm mb-2">💡 Mengapa Memakai Broadcast & Wait?</h3>
+          <p class="text-xs text-slate-300 leading-relaxed mb-3">
+            Tanpa sinyal pesan, kedua karakter akan berbicara bersamaan. Blok <i>broadcast</i> bertindak seperti lampu lalu lintas percakapan!
+          </p>
+          <div class="p-3 bg-slate-900 rounded-lg border border-slate-700">
+            <div class="text-xs font-bold text-amber-400 mb-1">Pelajaran Akhlak:</div>
+            <p class="text-xs text-slate-400">
+              Mendengarkan saat teman berbicara adalah adab mulia. Kita menunggu giliran dengan sabar sebelum menyampaikan pendapat.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 6: BAB 6 BURUNG MELUNCUR KOORDINAT -->
+    <div id="tab-6" class="tab-content hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div class="lg:col-span-7 bg-slate-800 border border-slate-700 rounded-2xl p-5 shadow-lg">
+          <h3 class="font-extrabold text-white text-base mb-2">🗺️ Peta Koordinat Kartesius Panggung Scratch</h3>
+          <img src="assets/bab6_diagram_koordinat.png" alt="Diagram Koordinat" class="rounded-lg border border-slate-600 w-full mb-3 shadow">
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Burung meluncur dari koordinat <code>(-200, 80)</code> di kiri atas menuju koordinat <code>(150, -40)</code> di kubah masjid.
+          </p>
+        </div>
+        <div class="lg:col-span-5 bg-slate-800 border border-slate-700 rounded-2xl p-5 shadow-lg">
+          <h3 class="font-extrabold text-white text-base mb-2">🧩 Blok Meluncur Halus</h3>
+          <img src="assets/bab6_sesudah.png" alt="Blok Bab 6" class="rounded-lg border border-slate-600 w-full mb-3 shadow">
+          <div class="p-3 bg-teal-950/60 border border-teal-500/40 rounded-lg text-xs text-teal-200">
+            <b>Tips Koding:</b> Ubah angka pada <code>meluncur dalam (3) detik</code> menjadi <b>6 detik</b> jika ingin melihat burung terbang melayang dengan sangat santai.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-slate-950 border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+    <p>Petualangan Islamic Coding • Diterbitkan untuk Pembaca Buku Level 2</p>
+    <p class="mt-1">Dibuat dengan cinta untuk generasi santri digital Indonesia.</p>
+  </footer>
+
+  <!-- Interactive JavaScript Simulations -->
+  <script>
+    function switchTab(num) {
+      for (let i = 1; i <= 6; i++) {
+        const tab = document.getElementById('tab-' + i);
+        const btn = document.getElementById('btn-' + i);
+        if (tab && btn) {
+          if (i === num) {
+            tab.classList.remove('hidden');
+            tab.classList.add('block');
+            btn.classList.remove('bg-slate-800', 'text-slate-300');
+            btn.classList.add('bg-teal-500', 'text-white');
+          } else {
+            tab.classList.remove('block');
+            tab.classList.add('hidden');
+            btn.classList.remove('bg-teal-500', 'text-white');
+            btn.classList.add('bg-slate-800', 'text-slate-300');
+          }
+        }
+      }
+    }
+
+    // Playable Bab 1
+    function playBab1() {
+      const bubble = document.getElementById('bubble1');
+      const status = document.getElementById('status1');
+      status.innerText = "Karakter menyapa...";
+      bubble.innerText = "Assalamu'alaikum!";
+      bubble.style.opacity = '1';
+      
+      setTimeout(() => {
+        bubble.innerText = "Namaku Zahra.";
+      }, 2000);
+
+      setTimeout(() => {
+        bubble.innerText = "Cita-citaku membuat aplikasi bermanfaat!";
+      }, 4000);
+
+      setTimeout(() => {
+        bubble.style.opacity = '0';
+        status.innerText = "Selesai menyapa dengan adab.";
+      }, 7000);
+    }
+
+    // Playable Bab 2
+    function playBab2() {
+      const burung = document.getElementById('burung2');
+      const bubble = document.getElementById('bubble2');
+      const status = document.getElementById('status2');
+      
+      burung.style.left = '56px';
+      burung.style.top = '112px';
+      bubble.style.opacity = '1';
+      bubble.innerText = "Bismillah, mengantar pesan sedekah!";
+      status.innerText = "Mengucap basmalah...";
+
+      setTimeout(() => {
+        bubble.style.opacity = '0';
+        status.innerText = "Meluncur melintasi desa (3 detik)...";
+        burung.style.left = '75%';
+        burung.style.top = '140px';
+      }, 2000);
+
+      setTimeout(() => {
+        bubble.innerText = "Assalamu'alaikum, pesan telah sampai!";
+        bubble.style.opacity = '1';
+        status.innerText = "Tiba di kubah masjid dengan selamat.";
+      }, 5000);
+    }
+
+    // Playable Bab 3
+    function playBab3() {
+      const bubble = document.getElementById('bubble3');
+      const charA = document.getElementById('char3a');
+      const charB = document.getElementById('char3b');
+      const status = document.getElementById('status3');
+
+      bubble.style.opacity = '1';
+      bubble.innerText = "Maaf, tadi aku kurang hati-hati...";
+      status.innerText = "Ahmad mengakui kekurangan diri...";
+
+      setTimeout(() => {
+        bubble.innerText = "Terima kasih sudah mengingatkanku! 😊";
+        charA.innerText = "😄";
+        charB.innerText = "😊";
+        status.innerText = "Saling memaafkan dengan senyum sedekah.";
+      }, 2500);
+
+      setTimeout(() => {
+        bubble.style.opacity = '0';
+      }, 5500);
+    }
+
+    // Playable Bab 4
+    let walking4 = false;
+    let step4 = 0;
+    function playBab4() {
+      const sprite = document.getElementById('sprite4');
+      const status = document.getElementById('status4');
+      const costumeName = document.getElementById('costumeName4');
+      const btn = document.getElementById('btnText4');
+
+      if (walking4) return;
+      walking4 = true;
+      btn.innerText = "Sedang Melangkah...";
+      status.innerText = "Melangkah teratur menuju masjid...";
+
+      let pos = 32;
+      const interval = setInterval(() => {
+        step4++;
+        pos += 24;
+        sprite.style.left = pos + 'px';
+        costumeName.innerText = (step4 % 2 === 0) ? 'langkah-1' : 'langkah-2';
+
+        if (pos > 240) {
+          clearInterval(interval);
+          walking4 = false;
+          btn.innerText = "▶ Ulangi Langkah";
+          status.innerText = "Alhamdulillah, tiba di pintu masjid!";
+        }
+      }, 250);
+    }
+  </script>
+</body>
+</html>
